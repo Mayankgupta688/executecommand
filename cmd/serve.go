@@ -7,6 +7,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/go-ping/ping"
 	"github.com/spf13/cobra"
 )
 
@@ -16,10 +17,20 @@ var serveCmd = &cobra.Command{
 	Short: "A brief description of your command",
 	Long:  `Serve Command`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("serve called")
+		inputValue, _ := cmd.Flags().GetString("sampleFlag")
+
+		fmt.Println(inputValue)
+		fmt.Println("command called")
+		_, err := ping.NewPinger(inputValue)
+		if err != nil {
+			fmt.Println("Error")
+		} else {
+			fmt.Println("No Error")
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
+	serveCmd.PersistentFlags().String("sampleFlag", "defaultValue", "www.google.com")
 }
