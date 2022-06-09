@@ -32,5 +32,5 @@ var serveCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
-	serveCmd.PersistentFlags().String("sampleFlag", "defaultValue", "www.google.com")
+	serveCmd.PersistentFlags().String("sampleFlag", "www.google.com", "Description for Flag")
 }
